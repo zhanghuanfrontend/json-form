@@ -32,9 +32,9 @@ export default class FormItem extends Component {
     }
     // 修改数据
     modifyDataFn = (keyList, value, config, success) => {
-        const {submitFn} = this.props
+        const {submitFn, totalConfig} = this.props
         this.props.modifyFn(keyList, value, (data) => {
-            if(!config.preventSubmit && submitFn && submitFn instanceof Function){
+            if(totalConfig.realTimeSubmit && !config.preventSubmit && submitFn && submitFn instanceof Function){
                 submitFn(data)
             }
             if(success && success instanceof Function){

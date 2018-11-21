@@ -6,5 +6,5 @@
       }
     }],"react", "stage-0"
   ],
-  "plugins": ["external-helpers"]
+  "plugins": []
 }

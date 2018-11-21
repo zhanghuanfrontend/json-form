@@ -175,6 +175,7 @@ export default class From extends Component {
                         return <div className="form-item-wrap" key={idx} style={item.style}>
                             <ValidItem error={errors[item.dataKey]}>
                                 <FormItem 
+                                    totalConfig={config}
                                     config={item} 
                                     data={data}
                                     assistData={assistData}

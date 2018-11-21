@@ -3,6 +3,7 @@ import {Select } from 'antd'
 const Option = Select.Option
 export default {
     formKey: 'example-form',
+    realTimeSubmit: true,
     data: {
         name: '',
         descr: '',
