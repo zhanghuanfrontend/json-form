@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const entryPath = path.join(process.cwd(), 'src/index.js')
@@ -48,6 +49,17 @@ module.exports = {
                 }]
             }
         ]
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                vendors: {
+                    test: /node_modules/,
+                    name: 'vendors'
+                }
+            }
+        }
     },
     plugins: [
         // new HtmlWebpackPlugin({

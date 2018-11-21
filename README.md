@@ -19,8 +19,19 @@ JSON表单的优点是：
 这个和第二个问题是同样的原因，这也是我的亲身经历，当我在项目中想优化一个小功能的时候，发现不仅把之前的逻辑改没了，还引出了不少的bug，这导致在一个逻辑很复杂的表单里，维护变成了一件高危工作。
 
 4：需要额外处理校验和缓存等功能
+## 如何使用
+其`github`地址为：[json_transform_form][1]。
+### 依赖环境
+
+ 1. React  基于React
+ 2. async-validator  基于它做校验
+### 安装
+```
+npm i json_transform_form --save
+```
 ## 一个栗子
 ```
+import Form from 'json_transform_form'
 const config = {
     formKey: 'example-form',
     data: {
@@ -67,7 +78,7 @@ const config = {
 <From ref={ref => this.FormWrap = ref} config={config}></From>
 ```
 上面是用JSON描述的三个常用的表单组件组合成的表单，其效果图如下：
-![图片描述][1]
+![图片描述][2]
 
 ## JSON表单的格式
 ```
@@ -113,7 +124,7 @@ const config = {
 type是用来唯一表示表单组件类型的字段，其中JSON表单提供了三种默认的表单组件：input、select、textarea，还有两种复杂类型的表单组件：form_array、container。
 
 form_array表单组件表示其数据结构为Array，含有增加项删除项的复合表单组件，该表单组件的配置里多一个children的字段，里面是每一项里面的表单组件配置的集合，其表单组件的效果如下图所示：
-![图片描述][2]
+![图片描述][3]
 
 container是用来自定义表单的接口，具体用法参考下面具体的介绍。
 
@@ -210,7 +221,7 @@ export default [
 
 init.js
 ```
-import Form from 'Form'
+import Form from 'json_transform_form'
 import components from './antd-components'
 From.createCustomComp(components)
 
@@ -351,5 +362,7 @@ JSON表单最适合的应用场景是简单表单，它可以用极少的代码�
  4. 添加了自动缓存功能
 在我的项目，我尝试了使用原始表单和JSON表单两种方式来实现同一个表单页，原始表单我编写了600多行的代码，而在JSON表单中，只有不到150行。
 
-  [1]: /img/bVbjKcz
-  [2]: /img/bVbjKnH
+
+  [1]: https://github.com/zhanghuanfrontend/json-form
+  [2]: /img/bVbjKcz
+  [3]: /img/bVbjKnH

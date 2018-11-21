@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Tabs, Button } from 'antd'
-import From from '../Form'
+import From from '../../dist/index.js'
 import autoConfig from './auto'
 import antdConfig from './antd'
 import exampleConfig from './test' 
