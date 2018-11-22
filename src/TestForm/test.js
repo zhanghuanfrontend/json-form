@@ -10,11 +10,12 @@ export default {
         param: {
             name: '',
             descr: ''
-        }
+        },
+        wrapTypeName: ''
     },
     config: [
         {
-            type: 'input',
+            type: 'antd-input',
             dataKey: 'name',
             placeholder: '请输入param',
             label: 'param',
@@ -25,18 +26,24 @@ export default {
                     callback('param格式不正确')
                 }
             }],
+            modifyDataFn: ({changeDataFn}, {parent, self, data}) => {
+                const curData = {...data, name: self.curData}
+                changeDataFn('', curData)
+            },
             style: {
-                display: 'inline-block',
-                width: 270,
+                wrap: {
+                    width: 270,
+                }
             },
         },
         {
             type: 'container',
             dataKey: 'descr',
             style: {
-                display: 'inline-block',
-                width: 100,
-                margin: '0 15px'
+                wrap: {
+                    width: 100,
+                    margin: '0 15px'
+                }
             },
             options: ['string', 'integer', 'float'],
             render: (curData, config, {changeFn, getFocus, loseFocus, error}) => {
@@ -57,30 +64,37 @@ export default {
             dataKey: 'param',
             label: 'param综合',
             style: {
-                width: 400,
+                wrap: {
+                    width: 400
+                },
+                label: {
+                    marginTop: -15
+                }
             },
             render: (curData, config, {changeFn, changeDataFn, JSONForm}) => {
                 return <div>
                     {
                         JSONForm([
                             {
-                                type: 'input',
+                                type: 'antd-input',
                                 dataKey: 'name',
                                 placeholder: '请输入param',
                                 validate: ['required'],
                                 preventSubmit: true,
                                 style: {
-                                    display: 'inline-block',
-                                    width: 170,
+                                    wrap: {
+                                        width: 170,
+                                    }
                                 },
                             },
                             {
                                 type: 'container',
                                 dataKey: 'descr',
                                 style: {
-                                    display: 'inline-block',
-                                    width: 100,
-                                    margin: '0 15px'
+                                    wrap: {
+                                        width: 100,
+                                        margin: '0 15px'
+                                    }
                                 },
                                 options: ['string', 'integer', 'float'],
                                 render: (curData, config, {changeFn, getFocus, loseFocus, error}) => {
@@ -100,7 +114,35 @@ export default {
                     }
                 </div>
             }
+        },
+        {
+            type: 'antd-search',
+            dataKey: 'wrapTypeName',
+            label: 'event事件',
+            preventSubmit: true,
+            customConfig: {
+                enterButton: true,
+                onSearch: () => {
+                    window.JSONForm.modifyDataFn((data, modifyDataFn) => {
+                        modifyDataFn('wrapTypeName', data.wrapTypeName)
+                    })
+                }
+            },
+            style: {
+                display: 'inline-block',
+                width: 350,
+            }
+        },
+    ],
+    style: {
+        label: {
+            textAlign: 'left',
+            width: 100,
+            paddingLeft: 22
+        },
+        wrap: {
+            display: 'inline-block',
         }
-    ]
+    }
 }
 

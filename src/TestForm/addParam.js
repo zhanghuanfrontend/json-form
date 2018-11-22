@@ -31,7 +31,9 @@ export default {
                 isDimSplited: false,
             },
             style: {
-                width: 750,
+                wrap: {
+                    width: 750,
+                }
             },
             children: [
                 {
@@ -40,8 +42,10 @@ export default {
                     label: 'Param',
                     placeholder: '请输入param',
                     style: {
-                        display: 'inline-block',
-                        width: 270,
+                        wrap: {
+                            display: 'inline-block',
+                            width: 270,
+                        }
                     },
                     validate: ['required', /^[a-zA-Z_{}0-9]+$/g],
                     modifyDataFn: ({changeFn, changeDataFn}, {parent, self}) => {
@@ -57,10 +61,12 @@ export default {
                     type: 'container',
                     dataKey: 'assistData.refreshParam',
                     style: {
-                        display: 'inline-block',
-                        width: 28,
-                        margin: '0 10px',
-                        verticalAlign: 'middle'
+                        wrap: {
+                            display: 'inline-block',
+                            width: 28,
+                            margin: '0 10px',
+                            verticalAlign: 'middle'
+                        }
                     },
                     render: (curData, config, {changeFn, changeDataFn}) => {
                         const handleClick = () => {
@@ -87,17 +93,21 @@ export default {
                         {type: 'enum', enum: ['string'], message: '只能为string'}
                     ],
                     style: {
-                        display: 'inline-block',
-                        width: 120,
+                        wrap: {
+                            display: 'inline-block',
+                            width: 120,
+                        }
                     },
                 },
                 {
                     type: 'container',
                     dataKey: 'isRequired',
                     style: {
-                        display: 'inline-block',
-                        width: 100,
-                        marginLeft: 10,
+                        wrap: {
+                            display: 'inline-block',
+                            width: 100,
+                            marginLeft: 10,
+                        }
                     },
                     render: (curData, config, {changeFn}) => {
                         return <Checkbox
@@ -112,9 +122,11 @@ export default {
                     type: 'container',
                     dataKey: 'isDimSplited',
                     style: {
-                        display: 'inline-block',
-                        width: 100,
-                        marginLeft: 10,
+                        wrap: {
+                            display: 'inline-block',
+                            width: 100,
+                            marginLeft: 10,
+                        }
                     },
                     render: (curData, config, {changeFn}) => {
                         return <Checkbox
@@ -131,13 +143,17 @@ export default {
                     label: 'Param含义',
                     validate: ['required'],
                     style: {
-                        width: 400,
+                        wrap: {
+                            width: 400,
+                        }
                     },
                 },
                 {
                     type: 'container',
                     style: {
-                        width: '100%'
+                        wrap: {
+                            width: '100%'
+                        }
                     },
                     render: (curData, config, {changeFn, changeDataFn}) => {
                         const handleClick = () => {

@@ -21,8 +21,10 @@ export default {
             dataKey: 'name',
             placeholder: '请输入param',
             style: {
-                display: 'inline-block',
-                width: 270,
+                wrap: {
+                    display: 'inline-block',
+                    width: 270,
+                }
             },
             validate: ['required', /^[a-zA-Z_{}0-9]+$/g]
         },
@@ -31,9 +33,11 @@ export default {
             dataKey: 'typeName',
             options: ['string', 'integer', 'float'],
             style: {
-                display: 'inline-block',
-                width: 100,
-                margin: '0 15px'
+                wrap: {
+                    display: 'inline-block',
+                    width: 100,
+                    margin: '0 15px'
+                }
             },
             validate: [{type: 'required', message: 'param类型不能为空'}]
         },
@@ -44,7 +48,9 @@ export default {
             label: 'param含义',
             validate: ['required'],
             style: {
-                width: 385,
+                wrap: {
+                    width: 385,
+                }
             }
         },
         {
@@ -52,7 +58,9 @@ export default {
             label: 'values',
             dataKey: 'validator.value',
             style: {
-                width: 460,
+                wrap: {
+                    width: 460,
+                }
             },
             addItem: {
                 name: '',
@@ -64,9 +72,11 @@ export default {
                     placeholder: 'value值',
                     dataKey: 'name',
                     style: {
-                        width: 138,
-                        marginRight: 10,
-                        display: 'inline-block'
+                        wrap: {
+                            width: 138,
+                            marginRight: 10,
+                            display: 'inline-block'
+                        }
                     },
                     validate: ['required']
                 },
@@ -75,8 +85,10 @@ export default {
                     placeholder: 'value备注',
                     dataKey: 'descr',
                     style: {
-                        width: 138,
-                        display: 'inline-block'
+                        wrap: {
+                            width: 138,
+                            display: 'inline-block'
+                        }
                     }
                 },
             ]

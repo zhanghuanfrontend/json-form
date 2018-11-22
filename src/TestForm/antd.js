@@ -22,8 +22,10 @@ export default {
             label: 'Param',
             placeholder: '请输入param',
             style: {
-                display: 'inline-block',
-                width: 270,
+                wrap: {
+                    display: 'inline-block',
+                    width: 270,
+                }
             },
             validate: ['required', /^[a-zA-Z_{}0-9]+$/g]
         },
@@ -35,9 +37,11 @@ export default {
                 {type: 'enum', enum: ['string'], message: '只能为string'}
             ],
             style: {
-                display: 'inline-block',
-                width: 120,
-                marginLeft: 10,
+                wrap: {
+                    display: 'inline-block',
+                    width: 120,
+                    marginLeft: 10,
+                }
             },
         },
         {
@@ -46,7 +50,9 @@ export default {
             label: 'Param含义',
             validate: ['required'],
             style: {
-                width: 400,
+                wrap: {
+                    width: 400,
+                }
             },
         },
         {
@@ -55,7 +61,9 @@ export default {
             dataKey: 'validator.value',
             hideBtn: true,
             style: {
-                width: 460,
+                wrap: {
+                    width: 460,
+                }
             },
             addItem: {
                 name: '',
@@ -67,9 +75,11 @@ export default {
                     placeholder: 'value值',
                     dataKey: 'name',
                     style: {
-                        width: 138,
-                        marginRight: 10,
-                        display: 'inline-block'
+                        wrap: {
+                            width: 138,
+                            marginRight: 10,
+                            display: 'inline-block'
+                        }
                     },
                     validate: ['required']
                 },
@@ -78,15 +88,19 @@ export default {
                     placeholder: 'value备注',
                     dataKey: 'descr',
                     style: {
-                        width: 138,
-                        display: 'inline-block'
+                        wrap: {
+                            width: 138,
+                            display: 'inline-block'
+                        }
                     }
                 },
                 {
                     type: 'container',
                     style: {
-                        display: 'inline-block',
-                        width: 74,
+                        wrap: {
+                            display: 'inline-block',
+                            width: 74,
+                        }
                     },
                     render: (curData, config, {changeFn, changeDataFn, getFocus, loseFocus, error}) => {
                         const parentData = config.parentData

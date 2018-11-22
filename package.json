@@ -1,6 +1,6 @@
 {
   "name": "json_transform_form",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JSON data quickly generate forms",
   "main": "dist/index.js",
   "scripts": {

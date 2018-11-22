@@ -98,9 +98,43 @@ export default class From extends Component {
                 window.localStorage.setItem(config.formKey, JSON.stringify(this.state.data))
             }
             if(success && success instanceof Function){
-                success()
+                success(this.state.data)
             }
         })
+    }
+    // 判断是否实时提交
+    realSubmit = (success, data) => {
+        const {config} = this.props
+        if(config.realTimeSubmit && this.submitFn && this.submitFn instanceof Function){
+            this.submitFn(data)
+        }
+        if(success && success instanceof Function){
+            success(data)
+        }
+    }
+    // 修改表单的值
+    modifyDataFn = (callback) => {
+        if(callback && callback instanceof Function){
+            callback(this.state.data, this.modifyKeyValue)
+        }
+    }
+    // 修改key对应的值
+    modifyKeyValue = (key, value, success) => {
+        if(key){
+            let curKeyList = []
+            if(key.includes('.')){
+                curKeyList = key.split('.')
+            }else{
+                curKeyList = [key]
+            }
+            this.modifyFn(curKeyList, value, (data) => {
+                this.realSubmit(success, data)
+            })
+        }else{
+            this.modifyAllData(data, (data) => {
+                this.realSubmit(success, data)
+            })
+        }
     }
     // 获取表单的值
     getValue = (callback) => {
@@ -172,10 +206,14 @@ export default class From extends Component {
                 data={data} ref={ref => this.validator = ref}>
                 {
                     Array.isArray(config.config) && config.config.map((item, idx) => {
-                        return <div className="form-item-wrap" key={idx} style={item.style}>
+                        const totalWrapStyle = (config.style || {}).wrap || {}
+                        const itemWrapStyle = (item.style || {}).wrap || {}
+                        const wrapStyle = {...totalWrapStyle, ...itemWrapStyle}
+                        return <div className="form-item-wrap" key={idx} style={wrapStyle}>
                             <ValidItem error={errors[item.dataKey]}>
                                 <FormItem 
                                     totalConfig={config}
+                                    totalStyle={config.style}
                                     config={item} 
                                     data={data}
                                     assistData={assistData}

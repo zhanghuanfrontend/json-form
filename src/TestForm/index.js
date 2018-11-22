@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Tabs, Button } from 'antd'
-import From from '../../dist/index.js'
+import From from '../Form'
 import autoConfig from './auto'
 import antdConfig from './antd'
 import exampleConfig from './test' 
@@ -22,6 +22,7 @@ export default class TestForm extends Component {
         this.FormWrap.registerSubmit((valid, data) => {
             console.log(valid, data)
         })
+        window.JSONForm = this.FormWrap
     }
     componentWillReceiveProps(nextProps){
         if((nextProps.filterInfo.appId && nextProps.filterInfo !== this.props.filterInfo)

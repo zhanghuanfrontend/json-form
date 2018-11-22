@@ -22,7 +22,7 @@ export default class FormItem extends Component {
                         }
                         this.modifyDataFn(curKeyList, data, config, success)
                     }else{
-                        this.props.modifyAllData(data, success)
+                        this.modifyAllData(data, config, success)
                     }
                 }
             }, param)
@@ -30,7 +30,19 @@ export default class FormItem extends Component {
             this.modifyDataFn(keyList, value, config, success)
         }
     }
-    // 修改数据
+    // 全部替换是否触发实时提交
+    modifyAllData = (submitData, config, success) => {
+        const {submitFn, totalConfig} = this.props
+        this.props.modifyAllData(submitData, (data) => {
+            if(totalConfig.realTimeSubmit && !config.preventSubmit && submitFn && submitFn instanceof Function){
+                submitFn(data)
+            }
+            if(success && success instanceof Function){
+                success(data)
+            }
+        })
+    }
+    // 修改数据是否触发实时提交
     modifyDataFn = (keyList, value, config, success) => {
         const {submitFn, totalConfig} = this.props
         this.props.modifyFn(keyList, value, (data) => {
@@ -187,7 +199,8 @@ export default class FormItem extends Component {
                                     ...config,
                                     curData: data,
                                     preData: curValue
-                                }
+                                },
+                                data: this.props.data,
                             }
                             this.handleChange(keyList, data ,success, config, param)
                         },
@@ -198,7 +211,8 @@ export default class FormItem extends Component {
                                     ...config,
                                     curData: data,
                                     preData: curValue
-                                }
+                                },
+                                data: this.props.data,
                             }
                             if(key){
                                 let curKeyList = []
@@ -209,7 +223,7 @@ export default class FormItem extends Component {
                                 }
                                 this.handleChange(curKeyList, data, success, config, param)
                             }else{
-                                this.props.modifyAllData(data, success)
+                                this.modifyAllData(data, config, success)
                             }
                         },
                         getFocus: () => {
@@ -254,12 +268,20 @@ export default class FormItem extends Component {
         return formItems[formType] || formItems['input']
     }
     getFormItemWrap = (config, data, keyList, childConfig) => {
-        const {error} = this.props
+        const {error, totalStyle = {}} = this.props
         const higherType = ['textarea', 'form_array']
+        const totalLabelStyle = totalStyle.label || {}
+        const ceilLabelStyle = (config.style || {}).label || {}
+        const labelstyle = {...totalLabelStyle, ...ceilLabelStyle}
+        const totalWrapStyle = totalStyle.wrap || {}
+        const ceilWrapStyle = (config.style || {}).wrap || {}
+        const wrapStyle = {...totalWrapStyle, ...ceilWrapStyle}
         const childElement = <div className="form-group">
             {
                 (config && config.label) && 
-                <label className={higherType.includes(config.type) ? 'label higher' : 'label'}><span>{config.label || ''}</span>：</label>
+                <label className={higherType.includes(config.type) ? 'label higher' : 'label'}>
+                    <span style={labelstyle}>{config.label || ''}：</span>
+                </label>
             }
             {
                 this.getCustomFormItem(config, data, keyList, childConfig)
@@ -267,7 +289,7 @@ export default class FormItem extends Component {
         </div>
         if(childConfig && childConfig.childType === 'children'){
             const keyStr = Array.isArray(keyList) ? keyList.join('.') : config.dataKey
-            return  <div className="form-item-wrap" style={config.style}>
+            return  <div className="form-item-wrap" style={wrapStyle}>
                 <ValidItem error={error[keyStr]}>
                     {childElement}
                 </ValidItem>

@@ -1,12 +1,13 @@
 import React from 'react'
 import { Input, Select } from 'antd'
 const Option = Select.Option
-const { TextArea } = Input
+const { TextArea, Search } = Input
 export default [
     {
         type: 'antd-input',
         render: (curData, config, {changeFn, getFocus, loseFocus, error}) => {
-            return <Input value={curData}  
+            return <Input value={curData} 
+                {...config.customConfig} 
                 onFocus={getFocus}
                 onBlur={loseFocus}
                 placeholder={config.placeholder ? config.placeholder : ''}
@@ -18,6 +19,7 @@ export default [
         type: 'antd-select',
         render: (curData, config, {changeFn, getFocus, loseFocus, error}) => {
             return <Select value={curData} 
+                {...config.customConfig} 
                 style={{width: '100%', height: 35}} 
                 onMouseEnter={getFocus}
                 onChange={(value) => changeFn(value, () => {
@@ -39,6 +41,18 @@ export default [
                 onBlur={loseFocus}
                 style={{borderColor: !!error ? '#f5222d' : ''}}
                 onChange={event => changeFn(event.target.value)} />
+        }
+    },
+    {
+        type: 'antd-search',
+        render: (curData, config, {changeFn, changeDataFn, getFocus, loseFocus, error}) => {
+            return <Search value={curData}  
+            onFocus={getFocus}
+            {...config.customConfig}
+            onBlur={loseFocus}
+            placeholder={config.placeholder ? config.placeholder : ''}
+            style={{borderColor: !!error ? '#f5222d' : ''}}
+            onChange={event => changeFn(event.target.value)} />
         }
     }
 ]
