@@ -62,10 +62,31 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json'],
     },
     externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM',
-        'prop-types': 'prop-types',
-        'async-validator': 'async-validator',
+        react: {
+            root: "React",
+            commonjs2: "react",
+            commonjs: "react",
+            amd: "react"
+        },
+        "react-dom": {
+            root: "ReactDOM",
+            commonjs2: "react-dom",
+            commonjs: "react-dom",
+            amd: "react-dom"
+        },
+        
+        'prop-types': {
+            root: "PropTypes",
+            commonjs2: 'prop-types',
+            commonjs: 'prop-types',
+            amd: 'prop-types'
+        },
+        'async-validator': {
+            root: 'Schema',
+            commonjs2: 'async-validator',
+            commonjs: 'async-validator',
+            amd: 'async-validator'
+        },
     },
     devtool: 'inline-source-map'
 }
