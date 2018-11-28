@@ -5,6 +5,8 @@ const inPath = path.join(process.cwd(), 'src')
 const webpack = require('webpack')
 const uglifyjs = require('uglifyjs-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin')
+const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
     entry: entryPath,
@@ -56,8 +58,22 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
              }
-         })
+        }),
+        new CompressionPlugin({
+            test: /\.(js|css|less)$/
+          })
     ],
+    //压缩js
+    optimization: {
+        minimizer: [
+            new UglifyjsPlugin({
+                uglifyOptions: {
+                    compress: false,
+                    comments: false,
+                }
+            })
+        ]
+    },
     resolve: {
         extensions: ['.js', '.jsx', '.json'],
     },

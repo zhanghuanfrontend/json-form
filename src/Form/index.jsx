@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Validator, {ValidItem} from './Validator'
 import {cloneData, getDataWrap, getAssistDataKey} from './utils/common'
 import './form.less'
+import { createNoSubstitutionTemplateLiteral } from 'typescript';
 
 export default class From extends Component {
     static propTypes = {
@@ -41,6 +42,8 @@ export default class From extends Component {
     componentWillReceiveProps(nextProps){
         if(nextProps.config && nextProps.config !== this.props.config){
             this.getStoreData(nextProps)
+        }else if(nextProps.config){
+            this.setState({data: {...this.state.data, ...cloneData(nextProps.config.data)}})
         }
     }
     // 读取缓存数据
@@ -57,6 +60,7 @@ export default class From extends Component {
             // if(['{}', '[]'].includes(JSON.stringify(storeData))){
             //     return
             // }
+            this.originData = props.config.data
             let newData = {...cloneData(props.config.data), ...storeData}
             this.setState({data: newData}, () => {
                 this.validator.refresh()

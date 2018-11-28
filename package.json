@@ -1,6 +1,6 @@
 {
   "name": "json_transform_form",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "JSON data quickly generate forms",
   "main": "dist/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babelrc-rollup": "^3.0.0",
+    "compression-webpack-plugin": "^2.0.0",
     "cross-env": "^5.1.4",
     "css-loader": "^1.0.1",
     "eslint": "^5.0.1",

@@ -23,6 +23,11 @@ export default class TestForm extends Component {
             console.log(valid, data)
         })
         window.JSONForm = this.FormWrap
+        setInterval(() => {
+            const {config} = this.state
+            config.data.name += 's'
+            this.setState({config,})
+        }, 1000)
     }
     componentWillReceiveProps(nextProps){
         if((nextProps.filterInfo.appId && nextProps.filterInfo !== this.props.filterInfo)
