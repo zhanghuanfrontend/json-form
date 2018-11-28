@@ -59,26 +59,26 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production')
              }
         }),
-        new CompressionPlugin({
-            test: /\.(js|css|less)$/
-          })
+        // new CompressionPlugin({
+        //     test: /\.(js|css|less)$/
+        // })
     ],
-    //压缩js
-    optimization: {
-        minimizer: [
-            new UglifyjsPlugin({
-                uglifyOptions: {
-                    compress: false,
-                    comments: false,
-                }
-            })
-        ]
-    },
+    // //压缩js
+    // optimization: {
+    //     minimizer: [
+    //         new UglifyjsPlugin({
+    //             uglifyOptions: {
+    //                 compress: false,
+    //                 comments: false,
+    //             }
+    //         })
+    //     ]
+    // },
     resolve: {
         extensions: ['.js', '.jsx', '.json'],
     },
     externals: {
-        react: {
+        'react': {
             root: "React",
             commonjs2: "react",
             commonjs: "react",

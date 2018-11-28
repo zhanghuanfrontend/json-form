@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import Validator, {ValidItem} from './Validator'
 import {cloneData, getDataWrap, getAssistDataKey} from './utils/common'
 import './form.less'
-import { createNoSubstitutionTemplateLiteral } from 'typescript';
 
 export default class From extends Component {
     static propTypes = {
@@ -41,8 +40,6 @@ export default class From extends Component {
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.config && nextProps.config !== this.props.config){
-            this.getStoreData(nextProps)
-        }else if(nextProps.config){
             this.setState({data: {...this.state.data, ...cloneData(nextProps.config.data)}})
         }
     }
