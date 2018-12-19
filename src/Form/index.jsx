@@ -64,24 +64,38 @@ export default class From extends Component {
             })
         }   
     }
-    // 修改表单数据
-    modifyFn = (keyList, value, success) => {
+    // 单次修改数据的值
+    modifyOnceValue = (keyList, value, stateData) => {
         const {data, assistData} = this.state
-        const {config} = this.props
         const newData = cloneData(data)
         const newAssistData = cloneData(assistData)
         if(Array.isArray(keyList) && keyList.includes('assistData')){
             const assistKeyList = getAssistDataKey(keyList)
             const {dataWrap, lastKey} = getDataWrap(newAssistData, assistKeyList)
             dataWrap[lastKey] = value
+            stateData.assistData = newAssistData
         }else{
             const {dataWrap, lastKey} = getDataWrap(newData, keyList)
             dataWrap[lastKey] = value
+            stateData.data = newData
         }
-        this.setState({
-            data: newData,
-            assistData: newAssistData
-        }, () => {
+    }
+    // 修改表单数据
+    modifyFn = (keyList, value, success) => {
+        const {config} = this.props
+        const stateData = {}
+        if(Array.isArray(keyList) && keyList.every(
+            item => item instanceof Object 
+            && item.key)){
+            keyList.forEach((item) => {
+                if(item.key){
+                    this.modifyOnceValue(item.key, item.value, stateData)
+                }
+            })
+        }else{
+            this.modifyOnceValue(keyList, value, stateData)
+        }
+        this.setState(stateData, () => {
             if(config.formKey && typeof config.formKey === 'string'){
                 window.localStorage.setItem(config.formKey, JSON.stringify(this.state.data))
             }   

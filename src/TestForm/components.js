@@ -1,18 +1,21 @@
 import React from 'react'
 import { Input, Select } from 'antd'
+import { getAssistDataKey } from '../Form/utils/common';
 const Option = Select.Option
 const { TextArea, Search } = Input
 export default [
     {
         type: 'antd-input',
-        render: (curData, config, {changeFn, getFocus, loseFocus, error}) => {
+        render: (curData, config, {changeFn, changeDataFn, getFocus, loseFocus, error}) => {
             return <Input value={curData} 
                 {...config.customConfig} 
                 onFocus={getFocus}
                 onBlur={loseFocus}
                 placeholder={config.placeholder ? config.placeholder : ''}
                 style={{borderColor: !!error ? '#f5222d' : ''}}
-                onChange={event => changeFn(event.target.value)} />
+                onChange={event => {
+                    changeFn(event.target.value)
+                }} />
         }
     },
     {

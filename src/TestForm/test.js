@@ -27,8 +27,15 @@ export default {
                 }
             }],
             modifyDataFn: ({changeDataFn}, {parent, self, data}) => {
-                const curData = {...data, name: self.curData}
-                changeDataFn('', curData)
+                // const curData = {...data, name: self.curData}
+                // changeDataFn('', curData)
+                changeDataFn([{
+                    key: 'name',
+                    value: self.curData
+                }, {
+                    key: 'assistData.test',
+                    value: true
+                }])
             },
             style: {
                 wrap: {

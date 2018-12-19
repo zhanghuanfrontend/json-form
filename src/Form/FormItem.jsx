@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {getLastKeyValue, cloneData, getAssistDataKey} from './utils/common'
+import {getLastKeyValue, cloneData, getAssistDataKey, handleKeyList} from './utils/common'
 import Form from './index'
 import {ValidItem} from './Validator'
 import './form.less'
@@ -13,13 +13,8 @@ export default class FormItem extends Component {
                     this.modifyDataFn(keyList, data, config ,success)
                 },
                 changeDataFn: (key, data, success) => {
+                    const curKeyList = handleKeyList(key)
                     if(key){
-                        let curKeyList = []
-                        if(key.includes('.')){
-                            curKeyList = key.split('.')
-                        }else{
-                            curKeyList = [key]
-                        }
                         this.modifyDataFn(curKeyList, data, config, success)
                     }else{
                         this.modifyAllData(data, config, success)
@@ -48,6 +43,9 @@ export default class FormItem extends Component {
         this.props.modifyFn(keyList, value, (data) => {
             if(totalConfig.realTimeSubmit && !config.preventSubmit && submitFn && submitFn instanceof Function){
                 submitFn(data)
+            }
+            if(value && value instanceof Function){
+                value(data)
             }
             if(success && success instanceof Function){
                 success(data)
@@ -214,13 +212,8 @@ export default class FormItem extends Component {
                                 },
                                 data: this.props.data,
                             }
+                            let curKeyList = handleKeyList(key)
                             if(key){
-                                let curKeyList = []
-                                if(key.includes('.')){
-                                    curKeyList = key.split('.')
-                                }else{
-                                    curKeyList = [key]
-                                }
                                 this.handleChange(curKeyList, data, success, config, param)
                             }else{
                                 this.modifyAllData(data, config, success)

@@ -76,3 +76,32 @@ export const getLastKeyValue = (data, keyList) => {
         lastKey,
     }
 }
+
+// 处理keyList
+export const handleKeyList = (key) => {
+    if(!key){
+        return key
+    }
+    if(Array.isArray(key)){
+        if(key.some(item => item instanceof Object && item.key && typeof item.value !== 'undefined')){
+            const newKey = []
+            key.forEach(child => {
+                if(child.key){
+                    newKey.push({
+                        key: child.key.includes('.') ? child.key.split('.') : [child.key],
+                        value: child.value
+                    })
+                }
+            })
+            return newKey
+        }else {
+            return key
+        }
+    }else{
+        if(key.includes('.')){
+            return key.split('.')
+        }else{
+            return [key]
+        }
+    }
+}
