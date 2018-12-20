@@ -108,7 +108,7 @@ export default class FormItem extends Component {
                     curValue = curValue[key]
                 }
             })
-        }else {
+        }else if(dataKey) {
             keyList.push(dataKey)
             curValue = curValue && curValue[dataKey]
         }

@@ -71,8 +71,8 @@ export default {
         },
         {
             type: 'container',
-            dataKey: 'param',
             label: 'param综合',
+            dataKey: '',
             style: {
                 wrap: {
                     width: 400
@@ -87,7 +87,7 @@ export default {
                         JSONForm([
                             {
                                 type: 'antd-input',
-                                dataKey: 'name',
+                                dataKey: 'param.name',
                                 placeholder: '请输入param',
                                 validate: ['required'],
                                 preventSubmit: true,
@@ -99,7 +99,7 @@ export default {
                             },
                             {
                                 type: 'container',
-                                dataKey: 'descr',
+                                dataKey: 'param.descr',
                                 style: {
                                     wrap: {
                                         width: 100,
