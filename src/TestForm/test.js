@@ -33,6 +33,9 @@ export default {
                     key: 'name',
                     value: self.curData
                 }, {
+                    key: 'param.name',
+                    value: self.curData + 'r'
+                }, {
                     key: 'assistData.test',
                     value: true
                 }])

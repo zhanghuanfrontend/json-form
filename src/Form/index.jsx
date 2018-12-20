@@ -65,10 +65,7 @@ export default class From extends Component {
         }   
     }
     // 单次修改数据的值
-    modifyOnceValue = (keyList, value, stateData) => {
-        const {data, assistData} = this.state
-        const newData = cloneData(data)
-        const newAssistData = cloneData(assistData)
+    modifyOnceValue = (keyList, value, stateData, newData, newAssistData) => {
         if(Array.isArray(keyList) && keyList.includes('assistData')){
             const assistKeyList = getAssistDataKey(keyList)
             const {dataWrap, lastKey} = getDataWrap(newAssistData, assistKeyList)
@@ -83,17 +80,20 @@ export default class From extends Component {
     // 修改表单数据
     modifyFn = (keyList, value, success) => {
         const {config} = this.props
+        const {data, assistData} = this.state
+        const newData = cloneData(data)
+        const newAssistData = cloneData(assistData)
         const stateData = {}
         if(Array.isArray(keyList) && keyList.every(
             item => item instanceof Object 
             && item.key)){
             keyList.forEach((item) => {
                 if(item.key){
-                    this.modifyOnceValue(item.key, item.value, stateData)
+                    this.modifyOnceValue(item.key, item.value, stateData, newData, newAssistData)
                 }
             })
         }else{
-            this.modifyOnceValue(keyList, value, stateData)
+            this.modifyOnceValue(keyList, value, stateData, newData, newAssistData)
         }
         this.setState(stateData, () => {
             if(config.formKey && typeof config.formKey === 'string'){
