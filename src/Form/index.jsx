@@ -39,7 +39,7 @@ export default class From extends Component {
         this.getStoreData(this.props)
     }
     componentWillReceiveProps(nextProps){
-        if(nextProps.config && nextProps.config !== this.props.config){
+        if(nextProps.config && nextProps.config !== this.props.config && nextProps.config.realTimeSubmit){
             this.setState({data: {...this.state.data, ...cloneData(nextProps.config.data)}})
         }
     }

@@ -11,6 +11,9 @@ export default {
             name: '',
             descr: ''
         },
+        type: {
+            name: ''
+        },
         wrapTypeName: ''
     },
     config: [
@@ -143,6 +146,31 @@ export default {
                 width: 350,
             }
         },
+        {
+            type: 'container',
+            dataKey: 'type',
+            render: (curData, config, {JSONForm}) => {
+                return <div>
+                    {
+                        JSONForm([{
+                            type: 'container',
+                            dataKey: '',
+                            render: (curData, config, {JSONForm}) => {
+                                return <div>
+                                    {
+                                        JSONForm([{
+                                            type: 'antd-input',
+                                            label: '测试嵌套',
+                                            dataKey: 'name'
+                                        }])
+                                    }
+                                </div>
+                            }
+                        }])
+                    }
+                </div>
+            }
+        }
     ],
     style: {
         label: {
